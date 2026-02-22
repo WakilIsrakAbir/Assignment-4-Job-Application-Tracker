@@ -3,9 +3,314 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Job Application Tracker</title>
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/218d7c0b86.js" crossorigin="anonymous"></script>
+    <!-- tailwind -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<body>
+<body class="bg-gray-100">
+    <header class="container mx-auto">
+        <h1 class="text-4xl font-bold text-[#002C5C] my-5">Job Application Tracker</h1>
     
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="bg-white shadow-md p-5 text-center rounded-md">
+                <p class="font-semibold">Total</p>
+                <p id="total" class="text-3xl font-semibold text-[#002C5C]">0</p>
+            </div>
+    
+            <div class="bg-white shadow-md p-5 text-center rounded-md">
+                <p class="font-semibold">Interview</p>
+                <p id="interviewCount" class="text-3xl font-semibold text-green-500">0</p>
+            </div>
+    
+            <div class="bg-white shadow-md p-5 text-center rounded-md">
+                <p class="font-semibold">Rejected</p>
+                <p id="rejectedCount" class="text-3xl font-semibold text-red-500">0</p>
+            </div>
+        </div>
+    </header>
+
+    <hr class="my-5">
+
+    <!-- available Section -->
+    <section class="container mx-auto flex justify-between my-5">
+        <div class="text-3xl font-semibold text-[#002C5C]">
+            <h1>Available Jobs</h1>
+        </div>
+        <div class="">
+            <p id="total2" class="text-gray-600">0 <span>Jobs</span></p>
+        </div>
+    </section>
+
+
+    <!-- Main Section -->
+    <main class="container mx-auto">
+    
+        <div class="">
+            <button onclick="toggleStyle('all-filter-btn')" class="bg-blue-500 px-5 py-2 text-white rounded-md cursor-pointer shadow-md"
+                id="all-filter-btn">All</button>
+            <button onclick="toggleStyle('interview-filter-btn')"
+                class="bg-white px-5 py-2 text-black rounded-md cursor-pointer shadow-md"
+                id="interview-filter-btn">Interview</button>
+            <button onclick="toggleStyle('rejected-filter-btn')"
+                class="bg-white px-5 py-2 text-black rounded-md cursor-pointer shadow-md"
+                id="rejected-filter-btn">Rejected</button>
+        </div>
+    
+        <section id="filtered-section" class="hidden mt-10 space-y-5">
+
+        </section>
+    
+    
+    
+        <!-- Cards -->
+        <section id="allCards" class="mt-10 space-y-5">
+    
+            <!-- card 1 -->
+            <div class="card bg-slate-100 flex justify-between border p-5 rounded-lg">
+                <div class="space-y-6">
+                    <div>
+                        <p class="company text-4xl font-semibold">Google</p>
+                        <p class="role text-lg text-gray-700">Frontend Developer</p>
+                    </div>
+    
+                    <div class="flex gap-5 flex-wrap">
+                        <p class="location bg-gray-100 p-1 rounded-sm px-3">Remote</p>
+                        <p class="time bg-gray-100 p-1 rounded-sm px-3">Full time</p>
+                        <p class="salary bg-gray-100 p-1 rounded-sm px-3">$130,000 - $175,000</p>
+                    </div>
+    
+                    <p class="status font-semibold w-fit px-2.5 py-1 bg-blue-100">Not Applied</p>
+                    <p class="notes text-gray-700">Applied via career page. Need follow-up in 5 days.</p>
+    
+                    <div class="flex gap-4 flex-wrap">
+                        <button
+                            class="interview-btn bg-blue-600 px-5 py-2 text-white rounded-md cursor-pointer">Interview</button>
+                        <button
+                            class="rejected-btn bg-red-600 px-5 py-2 text-white rounded-md cursor-pointer">Rejected</button>
+                    </div>
+                </div>
+    
+                <div>
+                    <i class="btn-delete cursor-pointer fa-solid fa-trash-can"></i>
+                </div>
+            </div>
+    
+            <!-- card 2 -->
+            <div class="card bg-slate-100 flex justify-between border p-5 rounded-lg">
+                <div class="space-y-6">
+                    <div>
+                        <p class="company text-4xl font-semibold">Microsoft</p>
+                        <p class="role text-lg text-gray-700">Software Engineer</p>
+                    </div>
+    
+                    <div class="flex gap-5 flex-wrap">
+                        <p class="location bg-gray-100 p-1 rounded-sm px-3">Dhaka</p>
+                        <p class="time bg-gray-100 p-1 rounded-sm px-3">Part-time</p>
+                        <p class="salary bg-gray-100 p-1 rounded-sm px-3">$80,000 - $120,000</p>
+                    </div>
+    
+                    <p class="status font-semibold w-fit px-2.5 py-1 bg-blue-100">Not Applied</p>
+                    <p class="notes text-gray-700">Waiting for recruiter response.</p>
+    
+                    <div class="flex gap-4 flex-wrap">
+                        <button
+                            class="interview-btn bg-blue-600 px-5 py-2 text-white rounded-md cursor-pointer">Interview</button>
+                        <button
+                            class="rejected-btn bg-red-600 px-5 py-2 text-white rounded-md cursor-pointer">Rejected</button>
+                    </div>
+                </div>
+    
+                <div>
+                    <i class="btn-delete cursor-pointer fa-solid fa-trash-can"></i>
+                </div>
+            </div>
+    
+            <!-- card 3 -->
+            <div class="card bg-slate-100 flex justify-between border p-5 rounded-lg">
+                <div class="space-y-6">
+                    <div>
+                        <p class="company text-4xl font-semibold">Amazon</p>
+                        <p class="role text-lg text-gray-700">Backend Developer (Django)</p>
+                    </div>
+    
+                    <div class="flex gap-5 flex-wrap">
+                        <p class="location bg-gray-100 p-1 rounded-sm px-3">Remote</p>
+                        <p class="time bg-gray-100 p-1 rounded-sm px-3">Full-time</p>
+                        <p class="salary bg-gray-100 p-1 rounded-sm px-3">$125,000 - $165,000</p>
+                    </div>
+    
+                    <p class="status font-semibold w-fit px-2.5 py-1 bg-blue-100">Not Applicable</p>
+                    <p class="notes text-gray-700">Prepare DRF + system design notes.</p>
+    
+                    <div class="flex gap-4 flex-wrap">
+                        <button
+                            class="interview-btn bg-blue-600 px-5 py-2 text-white rounded-md cursor-pointer">Interview</button>
+                        <button
+                            class="rejected-btn bg-red-600 px-5 py-2 text-white rounded-md cursor-pointer">Rejected</button>
+                    </div>
+                </div>
+    
+                <div>
+                    <i class="btn-delete cursor-pointer fa-solid fa-trash-can"></i>
+                </div>
+            </div>
+    
+            <!-- card 4 -->
+            <div class="card bg-slate-100 flex justify-between border p-5 rounded-lg">
+                <div class="space-y-6">
+                    <div>
+                        <p class="company text-4xl font-semibold">Meta</p>
+                        <p class="role text-lg text-gray-700">React Developer</p>
+                    </div>
+    
+                    <div class="flex gap-5 flex-wrap">
+                        <p class="location bg-gray-100 p-1 rounded-sm px-3">Remote</p>
+                        <p class="time bg-gray-100 p-1 rounded-sm px-3">Full-time</p>
+                        <p class="salary bg-gray-100 p-1 rounded-sm px-3">$140,000 - $190,000</p>
+                    </div>
+    
+                    <p class="status font-semibold w-fit px-2.5 py-1 bg-blue-100">Not Applicable</p>
+                    <p class="notes text-gray-700">Need strong React + system design preparation.</p>
+    
+                    <div class="flex gap-4 flex-wrap">
+                        <button
+                            class="interview-btn bg-blue-600 px-5 py-2 text-white rounded-md cursor-pointer">Interview</button>
+                        <button
+                            class="rejected-btn bg-red-600 px-5 py-2 text-white rounded-md cursor-pointer">Rejected</button>
+                    </div>
+                </div>
+    
+                <div>
+                    <i class="btn-delete cursor-pointer fa-solid fa-trash-can"></i>
+                </div>
+            </div>
+    
+            <!-- card 5 -->
+            <div class="card bg-slate-100 flex justify-between border p-5 rounded-lg">
+                <div class="space-y-6">
+                    <div>
+                        <p class="company text-4xl font-semibold">Netflix</p>
+                        <p class="role text-lg text-gray-700">Full Stack Developer</p>
+                    </div>
+    
+                    <div class="flex gap-5 flex-wrap">
+                        <p class="location bg-gray-100 p-1 rounded-sm px-3">USA (Remote)</p>
+                        <p class="time bg-gray-100 p-1 rounded-sm px-3">Full-time</p>
+                        <p class="salary bg-gray-100 p-1 rounded-sm px-3">$110,000 - $150,000</p>
+                    </div>
+    
+                    <p class="status font-semibold w-fit px-2.5 py-1 bg-blue-100">Not Applide</p>
+                    <p class="notes text-gray-700">Focus on Node.js + scalable architecture.</p>
+    
+                    <div class="flex gap-4 flex-wrap">
+                        <button
+                            class="interview-btn bg-blue-600 px-5 py-2 text-white rounded-md cursor-pointer">Interview</button>
+                        <button
+                            class="rejected-btn bg-red-600 px-5 py-2 text-white rounded-md cursor-pointer">Rejected</button>
+                    </div>
+                </div>
+    
+                <div>
+                    <i class="btn-delete cursor-pointer fa-solid fa-trash-can"></i>
+                </div>
+            </div>
+    
+            <!-- card 6 -->
+            <div class="card bg-slate-100 flex justify-between border p-5 rounded-lg">
+                <div class="space-y-6">
+                    <div>
+                        <p class="company text-4xl font-semibold">Tesla</p>
+                        <p class="role text-lg text-gray-700">Backend Engineer</p>
+                    </div>
+    
+                    <div class="flex gap-5 flex-wrap">
+                        <p class="location bg-gray-100 p-1 rounded-sm px-3">California</p>
+                        <p class="time bg-gray-100 p-1 rounded-sm px-3">Full-time</p>
+                        <p class="salary bg-gray-100 p-1 rounded-sm px-3">$130,000 - $170,00</p>
+                    </div>
+    
+                    <p class="status font-semibold w-fit px-2.5 py-1 bg-blue-100">Not Applicable</p>
+                    <p class="notes text-gray-700">Strong Python + microservices required.</p>
+    
+                    <div class="flex gap-4 flex-wrap">
+                        <button
+                            class="interview-btn bg-blue-600 px-5 py-2 text-white rounded-md cursor-pointer">Interview</button>
+                        <button
+                            class="rejected-btn bg-red-600 px-5 py-2 text-white rounded-md cursor-pointer">Rejected</button>
+                    </div>
+                </div>
+    
+                <div>
+                    <i class="btn-delete cursor-pointer fa-solid fa-trash-can"></i>
+                </div>
+            </div>
+    
+            <!-- card 7 -->
+            <div class="card bg-slate-100 flex justify-between border p-5 rounded-lg">
+                <div class="space-y-6">
+                    <div>
+                        <p class="company text-4xl font-semibold">Spotify</p>
+                        <p class="role text-lg text-gray-700">Frontend Engineer</p>
+                    </div>
+    
+                    <div class="flex gap-5 flex-wrap">
+                        <p class="location bg-gray-100 p-1 rounded-sm px-3">Sweden (Remote)</p>
+                        <p class="time bg-gray-100 p-1 rounded-sm px-3">Full-time</p>
+                        <p class="salary bg-gray-100 p-1 rounded-sm px-3">$130,000 - $175,000</p>
+                    </div>
+    
+                    <p class="status font-semibold w-fit px-2.5 py-1 bg-blue-100">Not Applicable</p>
+                    <p class="notes text-gray-700">Strong UI/UX sense + performance optimization.</p>
+    
+                    <div class="flex gap-4 flex-wrap">
+                        <button
+                            class="interview-btn bg-blue-600 px-5 py-2 text-white rounded-md cursor-pointer">Interview</button>
+                        <button
+                            class="rejected-btn bg-red-600 px-5 py-2 text-white rounded-md cursor-pointer">Rejected</button>
+                    </div>
+                </div>
+    
+                <div>
+                    <i class="btn-delete cursor-pointer fa-solid fa-trash-can"></i>
+                </div>
+            </div>
+    
+            <!-- card 8 -->
+            <div class="card bg-slate-100 flex justify-between border p-5 rounded-lg">
+                <div class="space-y-6">
+                    <div>
+                        <p class="company text-4xl font-semibold">OpenAI</p>
+                        <p class="role text-lg text-gray-700">AI Engineer</p>
+                    </div>
+    
+                    <div class="flex gap-5 flex-wrap">
+                        <p class="location bg-gray-100 p-1 rounded-sm px-3">Remote</p>
+                        <p class="time bg-gray-100 p-1 rounded-sm px-3">Full-time</p>
+                        <p class="salary bg-gray-100 p-1 rounded-sm px-3">$130,000 - $175,000</p>
+                    </div>
+    
+                    <p class="status font-semibold w-fit px-2.5 py-1 bg-blue-100">Not Applicable</p>
+                    <p class="notes text-gray-700">Need strong ML + Deep Learning knowledge.</p>
+    
+                    <div class="flex gap-4 flex-wrap">
+                        <button
+                            class="interview-btn bg-blue-600 px-5 py-2 text-white rounded-md cursor-pointer">Interview</button>
+                        <button
+                            class="rejected-btn bg-red-600 px-5 py-2 text-white rounded-md cursor-pointer">Rejected</button>
+                    </div>
+                </div>
+    
+                <div>
+                    <i class="btn-delete cursor-pointer fa-solid fa-trash-can"></i>
+                </div>
+            </div>
+    
+        </section>
+    </main>
+
+
+    <script src="./script.js"></script>
 </body>
 </html>
