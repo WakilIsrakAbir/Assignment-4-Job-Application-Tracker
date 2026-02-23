@@ -167,6 +167,30 @@ mainContainer.addEventListener("click", function (event){
             renderInterview();
         }
     }
+
+    // what happens after click in delete button
+    if (event.target.classList.contains("btn-delete")) {
+
+        const parentNode = event.target.parentNode.parentNode;
+
+        const company = parentNode.querySelector(".company").innerText;
+
+        interviewList = interviewList.filter(item => item.company != company);
+        rejectedList = rejectedList.filter(item => item.company != company);
+
+        parentNode.remove();
+        calculateCount();
+        calculateCount2();
+
+        if (currentStatus == "interview-filter-btn"){
+            renderInterview();
+        }
+            
+        if (currentStatus == "rejected-filter-btn"){ 
+            renderRejected();
+            return;
+        }
+    }
 });
 
 
