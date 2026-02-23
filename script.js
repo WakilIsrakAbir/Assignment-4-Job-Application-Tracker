@@ -1,3 +1,6 @@
+// for empty part
+const emptyState = document.getElementById("emptyState");
+
 // for last work
 let currentStatus = "all";
 // -----
@@ -57,23 +60,37 @@ function toggleStyle(id){
     selected.classList.remove("bg-white", "text-black");
     // button toggleing done
 
+    // for last work
+    currentStatus = id;
 
     // logic for => when i clicked a button another two is hidden
     if (id == "interview-filter-btn") {
         allCardSection.classList.add("hidden");
         filterSection.classList.remove("hidden");
         renderInterview();
-    }else if (id == "all-filter-btn") {
+
+        // for empty part
+        emptyState.classList.toggle("hidden", interviewList.length !== 0);
+        total2.innerText = interviewList.length;
+    }
+    else if (id == "all-filter-btn") {
         allCardSection.classList.remove("hidden");
         filterSection.classList.add("hidden");
-    }else if (id == "rejected-filter-btn") {
+
+        // for empty part
+        const totalJobs = allCardSection.children.length;
+        emptyState.classList.toggle("hidden", totalJobs !== 0);
+        total2.innerText = totalJobs;
+    }
+    else if (id == "rejected-filter-btn") {
         allCardSection.classList.add("hidden");
         filterSection.classList.remove("hidden");
         renderRejected();
-    }
 
-    // for last work
-    currentStatus = id;
+        // for empty part
+        emptyState.classList.toggle("hidden", rejectedList.length !== 0);
+        total2.innerText = rejectedList.length;
+    }
 }
 // ----------
 
@@ -169,7 +186,7 @@ mainContainer.addEventListener("click", function (event){
     }
 
     // what happens after click in delete button
-    if (event.target.classList.contains("btn-delete")) {
+    else if (event.target.classList.contains("btn-delete")) {
 
         const parentNode = event.target.parentNode.parentNode;
 
@@ -182,11 +199,21 @@ mainContainer.addEventListener("click", function (event){
         calculateCount();
         calculateCount2();
 
+        if (currentStatus == "all-filter-btn") {
+            const totalJobs = allCardSection.children.length;
+            emptyState.classList.toggle("hidden", totalJobs !== 0);
+            total2.innerText = totalJobs;
+        }
+
         if (currentStatus == "interview-filter-btn"){
+            emptyState.classList.toggle("hidden", interviewList.length !== 0);
+             total2.innerText = interviewList.length;
             renderInterview();
         }
             
         if (currentStatus == "rejected-filter-btn"){ 
+            emptyState.classList.toggle("hidden", rejectedList.length !== 0);
+            total2.innerText = rejectedList.length;
             renderRejected();
             return;
         }

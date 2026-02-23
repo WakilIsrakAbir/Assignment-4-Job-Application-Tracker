@@ -9,7 +9,7 @@
     <!-- tailwind -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-100 w-[80%] mx-auto">
     <header class="container mx-auto">
         <h1 class="text-4xl font-bold text-[#002C5C] my-5">Job Application Tracker</h1>
     
@@ -61,6 +61,17 @@
         <!-- in this section we add new object -->
         <section id="filtered-section" class="hidden mt-10 space-y-5">
 
+        </section>
+
+        <!-- Empty State (shows when current section has no jobs) -->
+        <section id="emptyState" class="hidden my-8">
+            <div class="bg-white rounded-lg shadow-md p-10 flex flex-col items-center justify-center min-h-[360px] border">
+                <div class="text-6xl text-blue-400 mb-4">
+                    <i class="fa-regular fa-file-lines"></i>
+                </div>
+                <h2 class="text-xl font-semibold text-[#002C5C]">No jobs available</h2>
+                <p class="text-gray-500 mt-2 text-sm">Check back soon for new job opportunities</p>
+            </div>
         </section>
     
     
